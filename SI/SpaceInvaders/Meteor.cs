@@ -39,5 +39,10 @@ namespace SpaceInvaders
             controls.Remove(meteor);
             meteor.Dispose();
         }
+
+        public Rectangle GetBounds()
+        {
+            return meteor.Bounds;
+        }
     }
 }

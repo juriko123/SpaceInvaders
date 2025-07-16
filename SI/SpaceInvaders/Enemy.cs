@@ -46,7 +46,7 @@ namespace SpaceInvaders
 
             foreach (PictureBox enemmy in enemies)
             {
-                if ((direction == 1 && enemmy.Right >= (window_width - 100)) // idk drugače gre čez???
+                if ((direction == 1 && enemmy.Right  + 100 >= window_width) // idk drugače gre čez???
                     || (direction == -1 && enemmy.Left - SPEED <= 0))
                 {
                     edge = true;

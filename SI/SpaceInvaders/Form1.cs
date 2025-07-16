@@ -92,7 +92,28 @@ namespace SpaceInvaders
                 player.Move_Right(ClientSize.Width);
             }
 
-            // ustrelimo bullet, če gre nad screen ga uničimo
+            // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy
+            Trk_bulletov();
+
+            //premiki enemyjev, če zadane rob, da gre dol...
+            enemy_ships.Move_enemies(ClientSize.Width);
+
+            //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
+            Ustvari_meteor();
+
+            //Preveri trke med igralcem in window height
+            Trk_Meteorja();
+
+            Invalidate();
+        }
+
+
+        /// <summary>
+        /// ustvari bullet in preveri trk med enemy in bulletom
+        /// odstrani bullet ce gre iz screena
+        /// </summary>
+        public void Trk_bulletov()
+        {
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 bullets[i].Move();
@@ -121,17 +142,25 @@ namespace SpaceInvaders
                 }
 
             }
+        }
 
-            //premiki enemyjev, če zadane rob, da gre dol...
-            enemy_ships.Move_enemies(ClientSize.Width);
-
-            //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
+        /// <summary>
+        /// metoda ustvari meteorje z verjetnostjo 1%.
+        /// </summary>
+        public void Ustvari_meteor()
+        {
             if (rand.Next(0, 100) == 1)
             {
                 meteor = new Meteor(Controls, ClientSize.Width);
                 meteorji.Add(meteor);
             }
+        }
 
+        /// <summary>
+        /// preveri trk meteorja z igralcem in odstrani meteor z screena
+        /// </summary>
+        public void Trk_Meteorja()
+        {
             for (int i = meteorji.Count - 1; i >= 0; i--)
             {
                 meteorji[i].Move();
@@ -140,15 +169,15 @@ namespace SpaceInvaders
                 {
                     meteorji[i].Destroy_meteor(Controls);
                     meteorji.RemoveAt(i);
+                    continue;
+                }
+
+                if (meteorji[i].GetBounds().IntersectsWith(player.GetBounds()))
+                {
+                    Application.Exit();
                 }
             }
-
- 
-            
-
-            Invalidate();
         }
-
         
     }
 }

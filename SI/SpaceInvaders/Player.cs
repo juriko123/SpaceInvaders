@@ -54,5 +54,10 @@ namespace SpaceInvaders
         {
             return battleship.Top;
         }
+
+        public Rectangle GetBounds()
+        {
+            return battleship.Bounds;
+        }
     }
 }
