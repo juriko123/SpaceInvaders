@@ -6,6 +6,8 @@ namespace SpaceInvaders
 {
     public partial class Form1 : Form
     {
+        Random rand = new Random(); 
+
         //our player
         private Player player;
         private bool left, right, shoot;
@@ -17,6 +19,10 @@ namespace SpaceInvaders
 
         //enemy
         private Enemy enemy_ships;
+
+        //meteor
+        private Meteor meteor; 
+        private List<Meteor> meteorji = new List<Meteor>();
 
 
         public Form1()
@@ -44,7 +50,7 @@ namespace SpaceInvaders
             // ustvariti now objekt bullet in ga dodati v seznam bullet
             if (e.KeyCode == Keys.L)
             {
-                int playerX = player.Left() + player.Width() / 2;
+                int playerX = player.Left() + (player.Width() / 2 - 5);
                 int playerY = player.Top();
                 if (bullets.Count < MAX_BULLETS)
                 {
@@ -118,6 +124,26 @@ namespace SpaceInvaders
 
             //premiki enemyjev, če zadane rob, da gre dol...
             enemy_ships.Move_enemies(ClientSize.Width);
+
+            //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
+            if (rand.Next(0, 100) == 1)
+            {
+                meteor = new Meteor(Controls, ClientSize.Width);
+                meteorji.Add(meteor);
+            }
+
+            for (int i = meteorji.Count - 1; i >= 0; i--)
+            {
+                meteorji[i].Move();
+
+                if (meteorji[i].Off_screen(ClientSize.Height))
+                {
+                    meteorji[i].Destroy_meteor(Controls);
+                    meteorji.RemoveAt(i);
+                }
+            }
+
+ 
             
 
             Invalidate();
