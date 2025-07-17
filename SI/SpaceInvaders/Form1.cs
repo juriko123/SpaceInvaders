@@ -22,10 +22,12 @@ namespace SpaceInvaders
 
         //enemy
         private Enemy enemy_ships;
+        private const int SPEED_ENEMY = 2;
 
         //meteor
         private Meteor meteor; 
         private List<Meteor> meteorji = new List<Meteor>();
+        private const int METEOR_DAMAGE = 10;
 
         // level
         private int level = 1;
@@ -35,7 +37,10 @@ namespace SpaceInvaders
         private Label HpLabel;
         private Label PointsLabel;
 
-        
+        //progress bar
+        private ProgressBar HpBar;
+
+
 
         public Form1()
         {
@@ -46,7 +51,7 @@ namespace SpaceInvaders
 
             //our player
             player = new Player(Controls, ClientSize.Width, ClientSize.Height);
-            enemy_ships = new Enemy(Controls, ClientSize.Width);
+            enemy_ships = new Enemy(Controls, ClientSize.Width, SPEED_ENEMY * level);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -118,6 +123,9 @@ namespace SpaceInvaders
 
                 //povecanje levela, če ni nasprotnikov, ustvarjanje nasprotnikov spet
                 Povecanje_levela();
+
+                //Preverjanje življenja
+                Preveri_HP();
             }
 
                 Invalidate();
@@ -192,7 +200,16 @@ namespace SpaceInvaders
 
                 if (meteorji[i].GetBounds().IntersectsWith(player.GetBounds()))
                 {
-                    Application.Exit();
+                    meteorji[i].Destroy_meteor(Controls);
+                    meteorji.RemoveAt(i);
+
+                    hp_player -= METEOR_DAMAGE;
+
+                    //label
+                    HpLabel.Text = $"HP: {hp_player}";
+
+                    //progress bar
+                    HpBar.Value = Math.Max(0, hp_player);
                 }
             }
         }
@@ -207,9 +224,20 @@ namespace SpaceInvaders
                 }
 
                 level++;
-                enemy_ships = new Enemy(Controls, ClientSize.Width);
+                enemy_ships = new Enemy(Controls, ClientSize.Width, level * SPEED_ENEMY);
                 LevelLabel.Text = $"LEVEL: {level}";
 
+            }
+        }
+
+        /// <summary>
+        /// preverja če je hp manjši ali enak 0
+        /// </summary>
+        public void Preveri_HP()
+        {
+            if (hp_player <= 0)
+            {
+                Application.Exit();
             }
         }
         
@@ -237,17 +265,28 @@ namespace SpaceInvaders
             PointsLabel.Font = new Font("Arial", 14, FontStyle.Bold);
 
             HpLabel = new Label();
-            HpLabel.Text = "HP: ";
+            HpLabel.Text = $"HP: {hp_player}";
             HpLabel.Size = new Size(200, 50);
-            HpLabel.Location = new Point((BackgroundLabel.Width / 2) - 300, 0);
+            HpLabel.Location = new Point((BackgroundLabel.Width / 2) - 200, 0);
             HpLabel.ForeColor = Color.Black;
             HpLabel.TextAlign = ContentAlignment.MiddleRight;
             HpLabel.Font = new Font("Arial", 14, FontStyle.Bold);
+
+            //progress bar
+            HpBar = new ProgressBar();
+            HpBar.Location = new Point((BackgroundLabel.Width / 2) - 50, 13);
+            HpBar.Size = new Size(200, 25);
+            HpBar.Maximum = hp_player;
+            HpBar.Value = hp_player;
+            HpBar.ForeColor = Color.Green;
+            HpBar.Style = ProgressBarStyle.Continuous;
 
 
             BackgroundLabel.Controls.Add(LevelLabel);
             BackgroundLabel.Controls.Add(PointsLabel);
             BackgroundLabel.Controls.Add(HpLabel);
+            BackgroundLabel.Controls.Add(HpBar);
+
 
         }
     }

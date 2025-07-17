@@ -12,18 +12,31 @@ namespace SpaceInvaders
     {
         private PictureBox enemy_Battleship;
         private const int SIZE = 30;
-        private const int ROWS = 3;
-        private const int COLUMNS = 3;
+        private const int ROWS = 5;
+        private const int COLUMNS = 5;
         private const int SPACE_BETWEEN = 20;
         private const int POLOVICA = 60;
-        private const int SPEED = 5;
+        private int speed;
         private const int MOVE_DOWN = 25;
         private List<PictureBox> enemies = new List<PictureBox>();
         private int direction = 1;
+
+        public int Speed
+        {
+            get { return speed; }
+            set {
+                if (value <= 0)
+                {
+                   throw new ArgumentException("Speed ne sme biti manjši od 0");
+                }
+                speed = value; }
+        }
         
 
-        public Enemy(Control.ControlCollection controls, int window_width)
+        public Enemy(Control.ControlCollection controls, int window_width, int speed)
         {
+            this.speed = speed;
+
             for (int i = 0; i < ROWS; i++)
             {
                 for (int j = 0; j < COLUMNS; j++)
@@ -46,12 +59,12 @@ namespace SpaceInvaders
 
             foreach (PictureBox enemmy in enemies)
             {
-                if ((direction == 1 && enemmy.Right  + 100 >= window_width) // idk drugače gre čez???
-                    || (direction == -1 && enemmy.Left - SPEED <= 0))
+                if ((direction == 1 && enemmy.Right + speed >= window_width) ||
+                    (direction == -1 && enemmy.Left - speed <= 0))
                 {
                     edge = true;
+                    break; // ZDAJ je smiselno imeti break
                 }
-                break;
             }
 
             if (edge)
@@ -62,15 +75,15 @@ namespace SpaceInvaders
                     enemmy.Top += MOVE_DOWN;
                 }
             }
-
             else
             {
                 foreach (PictureBox enemmy in enemies)
                 {
-                    enemmy.Left += direction * SPEED;
+                    enemmy.Left += direction * speed;
                 }
             }
         }
+
 
         public List<PictureBox> Get_List()
         {
