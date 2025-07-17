@@ -13,6 +13,7 @@ namespace SpaceInvaders
         private PictureBox battleship;
         private const int SIZE = 40;
         private const int SPEED = 10;
+        
 
         public Player(Control.ControlCollection controls ,int lengthWindow, int heightWindow)
         {

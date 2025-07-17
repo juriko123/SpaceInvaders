@@ -32,7 +32,7 @@ namespace SpaceInvaders
                     enemy_Battleship.Size = new Size(SIZE, SIZE);
                     enemy_Battleship.BackColor = Color.Blue;
                     int location_x = i * (SIZE + SPACE_BETWEEN) + (window_width - POLOVICA) / 2;
-                    int location_y = j * (SIZE + SPACE_BETWEEN);
+                    int location_y = j * (SIZE + SPACE_BETWEEN) + 51; //se 51, ker toliko je višina našega labela
                     enemy_Battleship.Location = new Point(location_x, location_y);
                     enemies.Add(enemy_Battleship);
                     controls.Add(enemy_Battleship);

@@ -20,7 +20,7 @@ namespace SpaceInvaders
             meteor = new PictureBox();
             meteor.Size = new Size(SIZE, SIZE);
             meteor.BackColor = Color.Green;
-            meteor.Location = new Point(rand.Next(0, (window_width - SIZE)), -SIZE);
+            meteor.Location = new Point(rand.Next(0, (window_width - SIZE)),0);
             controls.Add(meteor);
         }
 
