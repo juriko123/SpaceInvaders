@@ -13,6 +13,7 @@ namespace SpaceInvaders
         PictureBox bullet;
         private const int SIZE = 10;
         private const int SPEED = 10;
+        private Color col = Color.Red;
 
         /// <summary>
         /// posx -> bomo dobili od playerja
@@ -21,11 +22,12 @@ namespace SpaceInvaders
         /// </summary>
         /// <param name="posx"></param>
         /// <param name="posy"></param>
-        public Bullet(int posx, int posy, Control.ControlCollection controls)
+        public Bullet(int posx, int posy, Color col, Control.ControlCollection controls)
         {
+            this.col = col;
             this.bullet = new PictureBox();
             bullet.Size = new Size(SIZE, SIZE);
-            bullet.BackColor = Color.Red;
+            bullet.BackColor = col;
             bullet.Location = new Point(posx,posy);
             controls.Add(bullet);
         }
@@ -33,6 +35,11 @@ namespace SpaceInvaders
         public void Move()
         {
             bullet.Top -= SPEED;
+        }
+
+        public void Move_enemy()
+        {
+            bullet.Top += SPEED;
         }
 
         public bool Off_screen()

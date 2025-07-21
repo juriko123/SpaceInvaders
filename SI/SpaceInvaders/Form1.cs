@@ -12,12 +12,18 @@ namespace SpaceInvaders
         //our player
         private Player player;
         private bool left, right, shoot;
-        private int hp_player = 100;
+        private const int MAX_HP = 100;
+        private int hp_player = MAX_HP;
         private int points = 0;
+        
+
 
         //bullets 
         private Bullet bullet;
-        private List<Bullet> bullets = new List<Bullet>(); //shranjevali bullet
+        private Bullet bullet_enemy;
+        private List<Bullet> bullets_enemy = new List<Bullet>(); // shranjevali bullete enemijve
+        private List<Bullet> bullets_player = new List<Bullet>(); //shranjevali bullete igralca
+        private List<Bullet> bullets_first_boss = new List<Bullet>();
         private const int MAX_BULLETS = 5;
 
         //enemy
@@ -30,7 +36,7 @@ namespace SpaceInvaders
         private const int METEOR_DAMAGE = 10;
 
         // level
-        private int level = 1;
+        private int level = 5;
 
         //label
         private Label LevelLabel;
@@ -40,6 +46,16 @@ namespace SpaceInvaders
         //progress bar
         private ProgressBar HpBar;
 
+        //Colors
+        private Color COL_RED = Color.Red;
+        private Color COL_BLUE = Color.Blue;
+        private Color COL_PURPLE = Color.Purple;
+
+        //Boss1
+        Boss1 first_boss;
+
+        //COunter
+        private int counter = 0;
 
 
         public Form1()
@@ -72,10 +88,10 @@ namespace SpaceInvaders
             {
                 int playerX = player.Left() + (player.Width() / 2 - 5);
                 int playerY = player.Top();
-                if (bullets.Count < MAX_BULLETS)
+                if (bullets_player.Count < MAX_BULLETS)
                 {
-                    bullet = new Bullet(playerX, playerY, Controls);
-                    bullets.Add(bullet);
+                    bullet = new Bullet(playerX, playerY, COL_RED, Controls);
+                    bullets_player.Add(bullet);
                 }
                 shoot = true;
             }
@@ -109,8 +125,8 @@ namespace SpaceInvaders
                 if (right) player.Move_Right(ClientSize.Width);
 
 
-                // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy
-                Trk_bulletov();
+                // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy_ship
+                Trk_bulletov_enemy();
 
                 //premiki enemyjev, če zadane rob, da gre dol...
                 enemy_ships.Move_enemies(ClientSize.Width);
@@ -125,7 +141,33 @@ namespace SpaceInvaders
                 Povecanje_levela();
 
                 //Preverjanje življenja
-                Preveri_HP();
+                Preveri_HP_Igralca();
+
+                // enemy ustreli metek
+                Enemy_ustreli();
+
+            }
+            else
+            {
+                //player movement
+                if (left) player.Move_left();
+
+                if (right) player.Move_Right(ClientSize.Width);
+
+                //delete enemy ladje, ker je boss level
+                Izbrisi_enemy();
+                
+                // samo enkrat ustvarimo first_boss
+                if (first_boss == null)
+                {
+                    first_boss = new Boss1(Controls, ClientSize.Width / 2);
+                }
+
+                //premikane boss1 ladje
+                first_boss.Boss1Movement(ClientSize.Width);
+
+                //streljanje boss1 ladnje
+                First_boss_ustreli();
             }
 
                 Invalidate();
@@ -136,16 +178,16 @@ namespace SpaceInvaders
         /// ustvari bullet in preveri trk med enemy in bulletom
         /// odstrani bullet ce gre iz screena
         /// </summary>
-        public void Trk_bulletov()
+        public void Trk_bulletov_enemy()
         {
-            for (int i = bullets.Count - 1; i >= 0; i--)
+            for (int i = bullets_player.Count - 1; i >= 0; i--)
             {
-                bullets[i].Move();
+                bullets_player[i].Move();
 
-                if (bullets[i].Off_screen())
+                if (bullets_player[i].Off_screen())
                 {
-                    bullets[i].Destroy_bullet(Controls);
-                    bullets.RemoveAt(i);
+                    bullets_player[i].Destroy_bullet(Controls);
+                    bullets_player.RemoveAt(i);
                     continue; // gremo na naslednji bullet, da se izognemo napaki
                 }
 
@@ -154,15 +196,15 @@ namespace SpaceInvaders
 
                 for (int j = enemy_list.Count - 1; j >= 0; j--)
                 {
-                    if (bullets[i].GetBounds().IntersectsWith(enemy_list[j].Bounds))
+                    if (bullets_player[i].GetBounds().IntersectsWith(enemy_list[j].Bounds))
                     {
                         points += 10;
                         PointsLabel.Text = $"POINTS: {points}";
                         Controls.Remove(enemy_list[j]);
                         enemy_list.RemoveAt(j);
 
-                        bullets[i].Destroy_bullet(Controls);
-                        bullets.RemoveAt(i);
+                        bullets_player[i].Destroy_bullet(Controls);
+                        bullets_player.RemoveAt(i);
                         break;
                     }
                 }
@@ -209,7 +251,8 @@ namespace SpaceInvaders
                     HpLabel.Text = $"HP: {hp_player}";
 
                     //progress bar
-                    HpBar.Value = Math.Max(0, hp_player);
+                    HpBar.Value = Math.Max(0, Math.Min(hp_player, MAX_HP));
+                    HpBar.Refresh();
                 }
             }
         }
@@ -218,11 +261,6 @@ namespace SpaceInvaders
         {
             if (enemy_ships.Get_List().Count == 0)
             {
-                foreach (PictureBox e in enemy_ships.Get_List())
-                {
-                    Controls.Remove(e);
-                }
-
                 level++;
                 enemy_ships = new Enemy(Controls, ClientSize.Width, level * SPEED_ENEMY);
                 LevelLabel.Text = $"LEVEL: {level}";
@@ -233,14 +271,100 @@ namespace SpaceInvaders
         /// <summary>
         /// preverja če je hp manjši ali enak 0
         /// </summary>
-        public void Preveri_HP()
+        public void Preveri_HP_Igralca()
         {
             if (hp_player <= 0)
             {
                 Application.Exit();
             }
         }
-        
+
+        public void Enemy_ustreli()
+        {
+            if (rand.Next(0, 50) == 1)
+            {
+                List<PictureBox> enemy_list = enemy_ships.Get_List();
+                if (enemy_list.Count > 0)
+                {
+                    PictureBox kdo_bo_ustrelil = enemy_list[rand.Next(0, enemy_list.Count)];
+                    int posX = kdo_bo_ustrelil.Left + (kdo_bo_ustrelil.Width / 2 - 5);
+                    int posY = kdo_bo_ustrelil.Bottom;
+                    bullet_enemy = new Bullet(posX, posY, COL_BLUE, Controls);
+                    bullets_enemy.Add(bullet_enemy);
+                }
+            }
+
+            for (int i = bullets_enemy.Count - 1; i >= 0; i--)
+            {
+                bullets_enemy[i].Move_enemy();
+
+                if (bullets_enemy[i].Off_screen())
+                {
+                    bullets_enemy[i].Destroy_bullet(Controls);
+                    bullets_enemy.RemoveAt(i);
+                    continue; // gremo na naslednji bullet, da se izognemo napaki
+                }
+
+                if (bullets_enemy[i].GetBounds().IntersectsWith(player.GetBounds()))
+                { 
+                    bullets_enemy[i].Destroy_bullet(Controls);
+                    bullets_enemy.RemoveAt(i);
+
+                    hp_player -= 10;
+
+                    //label
+                    HpLabel.Text = $"HP: {hp_player}";
+
+                    //progress bar
+                    HpBar.Value = Math.Max(0, Math.Min(hp_player, MAX_HP));
+                    HpBar.Refresh();
+
+                }
+            }
+        }
+
+        public void Izbrisi_enemy()
+        {
+            var enemies = enemy_ships.Get_List();
+            for (int i = enemies.Count - 1; i >= 0; i--)
+            {
+                Controls.Remove(enemies[i]);
+                enemies.RemoveAt(i);
+            }
+        }
+
+        public void First_boss_ustreli()
+        {
+
+            if (counter % 10 == 0)
+            {
+                int x_pos_boss_left = first_boss.GetLeft();
+                int y_pos_boss = first_boss.GetBottom();
+                int x_pos_boss_middle = first_boss.GetLeft() + first_boss.GetWidth() / 2;
+                int x_pos_boss_right = first_boss.GetRight() - 10; //10 je size bulleta
+                Bullet bullet_first_boss_left = new Bullet(x_pos_boss_left, y_pos_boss, COL_PURPLE, Controls);
+                Bullet bullet_first_boss_middle = new Bullet(x_pos_boss_middle, y_pos_boss, COL_PURPLE, Controls);
+                Bullet bullet_first_boss_right = new Bullet(x_pos_boss_right, y_pos_boss, COL_PURPLE, Controls);
+                bullets_first_boss.Add(bullet_first_boss_left);
+                bullets_first_boss.Add(bullet_first_boss_middle);
+                bullets_first_boss.Add(bullet_first_boss_right);
+
+            }
+            counter++;
+
+            // premikanje metkov
+            for (int i = bullets_first_boss.Count - 1; i >= 0; i--)
+            {
+                bullets_first_boss[i].Move_enemy();
+
+                if (bullets_first_boss[i].Off_screen())
+                {
+                    bullets_first_boss[i].Destroy_bullet(Controls);
+                    bullets_first_boss.RemoveAt(i);
+                    continue; // gremo na naslednji bullet, da se izognemo napaki
+                }
+            }
+        }
         public void GameLabel()
         {
             Label BackgroundLabel = new Label();
@@ -276,7 +400,7 @@ namespace SpaceInvaders
             HpBar = new ProgressBar();
             HpBar.Location = new Point((BackgroundLabel.Width / 2) - 50, 13);
             HpBar.Size = new Size(200, 25);
-            HpBar.Maximum = hp_player;
+            HpBar.Maximum = MAX_HP;
             HpBar.Value = hp_player;
             HpBar.ForeColor = Color.Green;
             HpBar.Style = ProgressBarStyle.Continuous;
