@@ -156,7 +156,15 @@ namespace SpaceInvaders
 
                 //delete enemy ladje, ker je boss level
                 Izbrisi_enemy();
-                
+
+                //izbrise vse meteorje ki so še na sliki
+                IzbrisiMeteorje();
+
+                Trk_bulletov_enemy();
+
+                //Izbrise enemy bullete
+                IzbrisiEnemyBullete();
+
                 // samo enkrat ustvarimo first_boss
                 if (first_boss == null)
                 {
@@ -340,7 +348,7 @@ namespace SpaceInvaders
             {
                 int x_pos_boss_left = first_boss.GetLeft();
                 int y_pos_boss = first_boss.GetBottom();
-                int x_pos_boss_middle = first_boss.GetLeft() + first_boss.GetWidth() / 2;
+                int x_pos_boss_middle = first_boss.GetLeft() + first_boss.GetWidth() / 2 - 5;
                 int x_pos_boss_right = first_boss.GetRight() - 10; //10 je size bulleta
                 Bullet bullet_first_boss_left = new Bullet(x_pos_boss_left, y_pos_boss, COL_PURPLE, Controls);
                 Bullet bullet_first_boss_middle = new Bullet(x_pos_boss_middle, y_pos_boss, COL_PURPLE, Controls);
@@ -365,6 +373,25 @@ namespace SpaceInvaders
                 }
             }
         }
+
+        public void IzbrisiMeteorje()
+        {
+            for (int i = meteorji.Count - 1; i >= 0; i--)
+            {
+                meteorji[i].Destroy_meteor(Controls);
+                meteorji.RemoveAt(i);
+            }
+        }
+
+        public void IzbrisiEnemyBullete()
+        {
+            for (int i = bullets_enemy.Count - 1; i >= 0; i--)
+            {
+                bullets_enemy[i].Destroy_bullet(Controls);
+                bullets_enemy.RemoveAt(i);
+            }
+        }
+        
         public void GameLabel()
         {
             Label BackgroundLabel = new Label();

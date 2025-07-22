@@ -11,7 +11,7 @@ namespace SpaceInvaders
     internal class Boss1
     {
         private PictureBox boss1;
-        private const int LENGTH_SIZE = 100;
+        private const int LENGTH_SIZE = 120;
         private const int HEIGHT_SIZE = 50;
         private const int HEIGHT_POS = 50;
         private const int SPEED = 20;
