@@ -58,5 +58,16 @@ namespace SpaceInvaders
         {
             return boss1.Right;
         }
+
+        public Rectangle Bounds()
+        {
+            return boss1.Bounds;
+        }
+
+        public void Destroy_first_Boss(Control.ControlCollection controls)
+        {
+            controls.Remove(boss1);
+            boss1.Dispose();
+        }
     }
 }

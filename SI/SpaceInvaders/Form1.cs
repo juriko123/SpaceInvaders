@@ -36,7 +36,7 @@ namespace SpaceInvaders
         private const int METEOR_DAMAGE = 10;
 
         // level
-        private int level = 5;
+        private int level = 4;
 
         //label
         private Label LevelLabel;
@@ -53,6 +53,7 @@ namespace SpaceInvaders
 
         //Boss1
         Boss1 first_boss;
+        private int first_boss_hp = 20;
 
         //COunter
         private int counter = 0;
@@ -146,6 +147,9 @@ namespace SpaceInvaders
                 // enemy ustreli metek
                 Enemy_ustreli();
 
+                //izbrise bullete prvega bossa
+                IzbrisiFirstBossBullete();
+
             }
             else
             {
@@ -160,7 +164,9 @@ namespace SpaceInvaders
                 //izbrise vse meteorje ki so še na sliki
                 IzbrisiMeteorje();
 
-                Trk_bulletov_enemy();
+                //player bullets movement
+                //bulleti in collision z bossom
+                PlayerBullets();
 
                 //Izbrise enemy bullete
                 IzbrisiEnemyBullete();
@@ -391,7 +397,53 @@ namespace SpaceInvaders
                 bullets_enemy.RemoveAt(i);
             }
         }
-        
+
+        public void IzbrisiFirstBossBullete()
+        {
+            for (int i = bullets_first_boss.Count - 1; i >= 0; i--)
+            {
+                bullets_first_boss[i].Destroy_bullet(Controls);
+                bullets_first_boss.RemoveAt(i);
+            }
+        }
+        /// <summary>
+        /// v boss levelih se premikajo igralcevi bulleti in pregledajo trke z bossi
+        /// </summary>
+        public void PlayerBullets()
+        {
+            for (int i = bullets_player.Count - 1; i >= 0; i--)
+            {
+                bullets_player[i].Move();
+
+                if (bullets_player[i].Off_screen())
+                {
+                    bullets_player[i].Destroy_bullet(Controls);
+                    bullets_player.RemoveAt(i);
+                    continue; // gremo na naslednji bullet, da se izognemo napaki
+                }
+
+                if (first_boss != null && bullets_player[i].GetBounds().IntersectsWith(first_boss.Bounds()))
+                {
+                    bullets_player[i].Destroy_bullet(Controls);
+                    bullets_player.RemoveAt(i);
+
+                    //boss hp --
+                    first_boss_hp -= 10;
+
+                    if (first_boss_hp == 0)
+                    {
+                        first_boss.Destroy_first_Boss(Controls);
+                        level++;
+
+                        points += 50;
+                        PointsLabel.Text = $"SCORE: {points}";
+                    }
+                }
+
+
+            }
+        }
+
         public void GameLabel()
         {
             Label BackgroundLabel = new Label();
