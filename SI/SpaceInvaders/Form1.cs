@@ -56,8 +56,6 @@ namespace SpaceInvaders
         Boss1 first_boss;
         private int first_boss_hp = 20;
         private const int BOSS1DAMAGE = 10;
-        private int bossDelayCounter = 0;
-        private const int BOSS_DELAY_TICKS = 300;
 
         //COunter
         private int counter = 0;
@@ -179,19 +177,17 @@ namespace SpaceInvaders
                     first_boss = new Boss1(Controls, ClientSize.Width / 2);
                 }
 
-                if (first_boss != null)
-                {
-                    bossDelayCounter++;
-
-                    if (bossDelayCounter < BOSS_DELAY_TICKS)
-                        return;
-
-                    //premikanje boss ladje
-                    first_boss.Boss1Movement(ClientSize.Width);
+                //premikanje boss ladje
+                first_boss.Boss1Movement(ClientSize.Width);
                     
-                    //streljanje
-                    First_boss_ustreli();
-                }
+                //streljanje
+                First_boss_ustreli();
+
+
+                PlayerBullets();
+
+                //Preverjanje življenja
+                Preveri_HP_Igralca();
 
             }
 
