@@ -42,9 +42,15 @@ namespace SpaceInvaders
             bullet.Top += SPEED;
         }
 
+        //to je samo za zgoraj
         public bool Off_screen()
         {
             return bullet.Top < 0;
+        }
+
+        public bool Off_screen_bottom(int window_height)
+        {
+            return bullet.Top > window_height;
         }
 
         public void Destroy_bullet(Control.ControlCollection controls)

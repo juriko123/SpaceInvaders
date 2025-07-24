@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace SpaceInvaders
 {
@@ -36,7 +37,7 @@ namespace SpaceInvaders
         private const int METEOR_DAMAGE = 10;
 
         // level
-        private int level = 4;
+        private int level = 5;
 
         //label
         private Label LevelLabel;
@@ -54,6 +55,9 @@ namespace SpaceInvaders
         //Boss1
         Boss1 first_boss;
         private int first_boss_hp = 20;
+        private const int BOSS1DAMAGE = 10;
+        private int bossDelayCounter = 0;
+        private const int BOSS_DELAY_TICKS = 300;
 
         //COunter
         private int counter = 0;
@@ -62,6 +66,7 @@ namespace SpaceInvaders
         public Form1()
         {
             InitializeComponent();
+            DoubleBuffered = true;
 
             //GAMElabel
             GameLabel();
@@ -121,6 +126,7 @@ namespace SpaceInvaders
         {
             if (level % 5 != 0)
             {
+
                 if (left) player.Move_left();
 
                 if (right) player.Move_Right(ClientSize.Width);
@@ -164,10 +170,6 @@ namespace SpaceInvaders
                 //izbrise vse meteorje ki so še na sliki
                 IzbrisiMeteorje();
 
-                //player bullets movement
-                //bulleti in collision z bossom
-                PlayerBullets();
-
                 //Izbrise enemy bullete
                 IzbrisiEnemyBullete();
 
@@ -177,11 +179,20 @@ namespace SpaceInvaders
                     first_boss = new Boss1(Controls, ClientSize.Width / 2);
                 }
 
-                //premikane boss1 ladje
-                first_boss.Boss1Movement(ClientSize.Width);
+                if (first_boss != null)
+                {
+                    bossDelayCounter++;
 
-                //streljanje boss1 ladnje
-                First_boss_ustreli();
+                    if (bossDelayCounter < BOSS_DELAY_TICKS)
+                        return;
+
+                    //premikanje boss ladje
+                    first_boss.Boss1Movement(ClientSize.Width);
+                    
+                    //streljanje
+                    First_boss_ustreli();
+                }
+
             }
 
                 Invalidate();
@@ -312,7 +323,7 @@ namespace SpaceInvaders
             {
                 bullets_enemy[i].Move_enemy();
 
-                if (bullets_enemy[i].Off_screen())
+                if (bullets_enemy[i].Off_screen_bottom(ClientSize.Height))
                 {
                     bullets_enemy[i].Destroy_bullet(Controls);
                     bullets_enemy.RemoveAt(i);
@@ -371,11 +382,26 @@ namespace SpaceInvaders
             {
                 bullets_first_boss[i].Move_enemy();
 
-                if (bullets_first_boss[i].Off_screen())
+                if (bullets_first_boss[i].Off_screen_bottom(ClientSize.Height))
                 {
                     bullets_first_boss[i].Destroy_bullet(Controls);
                     bullets_first_boss.RemoveAt(i);
                     continue; // gremo na naslednji bullet, da se izognemo napaki
+                }
+
+                if (bullets_first_boss[i].GetBounds().IntersectsWith(player.GetBounds()))
+                {
+                    bullets_first_boss[i].Destroy_bullet(Controls);
+                    bullets_first_boss.RemoveAt(i);
+
+                    hp_player -= BOSS1DAMAGE;
+
+                    //label
+                    HpLabel.Text = $"HP: {hp_player}";
+
+                    //progress bar
+                    HpBar.Value = Math.Max(0, Math.Min(hp_player, MAX_HP));
+                    HpBar.Refresh();
                 }
             }
         }
@@ -453,7 +479,7 @@ namespace SpaceInvaders
             Controls.Add(BackgroundLabel);
 
             LevelLabel = new Label();
-            LevelLabel.Text = $"LEVEL: 1";
+            LevelLabel.Text = $"LEVEL: {level}";
             LevelLabel.Size = new Size(200, 50);
             LevelLabel.ForeColor = Color.Black;
             LevelLabel.TextAlign = ContentAlignment.MiddleLeft;
