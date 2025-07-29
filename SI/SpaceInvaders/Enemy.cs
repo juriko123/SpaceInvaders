@@ -43,7 +43,7 @@ namespace SpaceInvaders
                 {
                     enemy_Battleship = new PictureBox();
                     enemy_Battleship.Size = new Size(SIZE, SIZE);
-                    enemy_Battleship.BackColor = Color.Blue;
+                    enemy_Battleship.BackColor = ChangeColor(j);
                     int location_x = i * (SIZE + SPACE_BETWEEN) + (window_width - POLOVICA) / 2;
                     int location_y = j * (SIZE + SPACE_BETWEEN) + 51; //se 51, ker toliko je višina našega labela
                     enemy_Battleship.Location = new Point(location_x, location_y);
@@ -51,6 +51,15 @@ namespace SpaceInvaders
                     controls.Add(enemy_Battleship);
                 }
             }
+        }
+
+        public Color ChangeColor(int ROWS)
+        {
+            if (ROWS % 5 == 1) return Color.Blue;
+            else if (ROWS % 5 == 2) return Color.Gray;
+            else if (ROWS % 5 == 3) return Color.Orange;
+            else if (ROWS % 5 == 4) return Color.Purple;
+            else return Color.Yellow;
         }
 
         public void Move_enemies(int window_width)

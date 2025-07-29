@@ -24,7 +24,7 @@ namespace SpaceInvaders
         private Bullet bullet_enemy;
         private List<Bullet> bullets_enemy = new List<Bullet>(); // shranjevali bullete enemijve
         private List<Bullet> bullets_player = new List<Bullet>(); //shranjevali bullete igralca
-        private List<Bullet> bullets_first_boss = new List<Bullet>();
+        private List<Bullet> bullets_first_boss = new List<Bullet>(); //shranjevali bullete first_bossa
         private const int MAX_BULLETS = 5;
 
         //enemy
@@ -37,7 +37,7 @@ namespace SpaceInvaders
         private const int METEOR_DAMAGE = 10;
 
         // level
-        private int level = 5;
+        private int level = 9;
 
         //label
         private Label LevelLabel;
@@ -150,6 +150,8 @@ namespace SpaceInvaders
 
                 // enemy ustreli metek
                 Enemy_ustreli();
+
+                TrkEnemy_Player();
 
                 //izbrise bullete prvega bossa
                 IzbrisiFirstBossBullete();
@@ -463,6 +465,33 @@ namespace SpaceInvaders
                 }
 
 
+            }
+        }
+
+        /// <summary>
+        /// pregleda ali trčita enemy ship in player ship in če grejo enemy_ladje iz zaslona
+        /// če ja, zgubi player hp
+        /// </summary>
+        public void TrkEnemy_Player()
+        {
+            List<PictureBox> enemy_ladje = enemy_ships.Get_List();
+            for (int i = enemy_ladje.Count - 1; i >= 0; i--)
+            {
+                // Check for collision with the player or if the enemy is offscreen
+                if (enemy_ladje[i].Bounds.IntersectsWith(player.GetBounds()) || enemy_ladje[i].Top > ClientSize.Height)
+                {
+                    // Remove the enemy from the controls and list
+                    Controls.Remove(enemy_ladje[i]);
+                    enemy_ladje.RemoveAt(i);
+
+                    // Update the player's health
+                    hp_player -= 10;
+
+                    // Update label and progress bar
+                    HpLabel.Text = $"HP: {hp_player}";
+                    HpBar.Value = Math.Max(0, Math.Min(hp_player, MAX_HP));
+                    HpBar.Refresh();
+                }
             }
         }
 
