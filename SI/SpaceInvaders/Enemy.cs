@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 using System.Windows.Forms;
+using System.Drawing;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SpaceInvaders
 {
@@ -12,8 +14,8 @@ namespace SpaceInvaders
     {
         private PictureBox enemy_Battleship;
         private const int SIZE = 30;
-        private const int ROWS = 5;
-        private const int COLUMNS = 5;
+        private const int ROWS = 7;
+        private const int COLUMNS = 4;
         private const int SPACE_BETWEEN = 20;
         private const int POLOVICA = 60;
         private int speed;
@@ -43,7 +45,8 @@ namespace SpaceInvaders
                 {
                     enemy_Battleship = new PictureBox();
                     enemy_Battleship.Size = new Size(SIZE, SIZE);
-                    enemy_Battleship.BackColor = ChangeColor(j);
+                    enemy_Battleship.Image = ChangeImage(j);
+                    enemy_Battleship.SizeMode = PictureBoxSizeMode.StretchImage;
                     int location_x = i * (SIZE + SPACE_BETWEEN) + (window_width - POLOVICA) / 2;
                     int location_y = j * (SIZE + SPACE_BETWEEN) + 51; //se 51, ker toliko je višina našega labela
                     enemy_Battleship.Location = new Point(location_x, location_y);
@@ -53,13 +56,13 @@ namespace SpaceInvaders
             }
         }
 
-        public Color ChangeColor(int ROWS)
+        public System.Drawing.Image ChangeImage(int column)
         {
-            if (ROWS % 5 == 1) return Color.Blue;
-            else if (ROWS % 5 == 2) return Color.Gray;
-            else if (ROWS % 5 == 3) return Color.Orange;
-            else if (ROWS % 5 == 4) return Color.Purple;
-            else return Color.Yellow;
+            string image_path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\";
+            if (column % 5 == 1) return System.Drawing.Image.FromFile(image_path + "extra.png");
+            else if (column % 5 == 2) return System.Drawing.Image.FromFile(image_path + "green.png");
+            else if (column % 5 == 3) return System.Drawing.Image.FromFile(image_path + "red.png");
+            else return System.Drawing.Image.FromFile(image_path + "yellow.png");
         }
 
         public void Move_enemies(int window_width)

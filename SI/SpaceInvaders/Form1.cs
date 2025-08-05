@@ -17,8 +17,6 @@ namespace SpaceInvaders
         private int hp_player = MAX_HP;
         private int points = 0;
         
-
-
         //bullets 
         private Bullet bullet;
         private Bullet bullet_enemy;
@@ -37,7 +35,7 @@ namespace SpaceInvaders
         private const int METEOR_DAMAGE = 10;
 
         // level
-        private int level = 9;
+        private int level = 1;
 
         //label
         private Label LevelLabel;
@@ -60,11 +58,14 @@ namespace SpaceInvaders
         //COunter
         private int counter = 0;
 
+        //start game
+        private bool start;
 
         public Form1()
         {
             InitializeComponent();
             DoubleBuffered = true;
+
 
             //GAMElabel
             GameLabel();
@@ -72,6 +73,15 @@ namespace SpaceInvaders
             //our player
             player = new Player(Controls, ClientSize.Width, ClientSize.Height);
             enemy_ships = new Enemy(Controls, ClientSize.Width, SPEED_ENEMY * level);
+
+            //game start 
+            start = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            start = true;
+            menu_panel.Hide();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -122,75 +132,80 @@ namespace SpaceInvaders
 
         private void GameUpdate(object sender, EventArgs e)
         {
-            if (level % 5 != 0)
-            {
-
-                if (left) player.Move_left();
-
-                if (right) player.Move_Right(ClientSize.Width);
-
-
-                // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy_ship
-                Trk_bulletov_enemy();
-
-                //premiki enemyjev, če zadane rob, da gre dol...
-                enemy_ships.Move_enemies(ClientSize.Width);
-
-                //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
-                Ustvari_meteor();
-
-                //Preveri trke med igralcem in window height
-                Trk_Meteorja();
-
-                //povecanje levela, če ni nasprotnikov, ustvarjanje nasprotnikov spet
-                Povecanje_levela();
-
-                //Preverjanje življenja
-                Preveri_HP_Igralca();
-
-                // enemy ustreli metek
-                Enemy_ustreli();
-
-                TrkEnemy_Player();
-
-                //izbrise bullete prvega bossa
-                IzbrisiFirstBossBullete();
-
-            }
+            if (!start) return;
+            
             else
             {
-                //player movement
-                if (left) player.Move_left();
-
-                if (right) player.Move_Right(ClientSize.Width);
-
-                //delete enemy ladje, ker je boss level
-                Izbrisi_enemy();
-
-                //izbrise vse meteorje ki so še na sliki
-                IzbrisiMeteorje();
-
-                //Izbrise enemy bullete
-                IzbrisiEnemyBullete();
-
-                // samo enkrat ustvarimo first_boss
-                if (first_boss == null)
+                if (level % 5 != 0)
                 {
-                    first_boss = new Boss1(Controls, ClientSize.Width / 2);
+
+                    if (left) player.Move_left();
+
+                    if (right) player.Move_Right(ClientSize.Width);
+
+
+                    // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy_ship
+                    Trk_bulletov_enemy();
+
+                    //premiki enemyjev, če zadane rob, da gre dol...
+                    enemy_ships.Move_enemies(ClientSize.Width);
+
+                    //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
+                    Ustvari_meteor();
+
+                    //Preveri trke med igralcem in window height
+                    Trk_Meteorja();
+
+                    //povecanje levela, če ni nasprotnikov, ustvarjanje nasprotnikov spet
+                    Povecanje_levela();
+
+                    //Preverjanje življenja
+                    Preveri_HP_Igralca();
+
+                    // enemy ustreli metek
+                    Enemy_ustreli();
+
+                    TrkEnemy_Player();
+
+                    //izbrise bullete prvega bossa
+                    IzbrisiFirstBossBullete();
+
                 }
+                else
+                {
+                    //player movement
+                    if (left) player.Move_left();
 
-                //premikanje boss ladje
-                first_boss.Boss1Movement(ClientSize.Width);
-                    
-                //streljanje
-                First_boss_ustreli();
+                    if (right) player.Move_Right(ClientSize.Width);
+
+                    //delete enemy ladje, ker je boss level
+                    Izbrisi_enemy();
+
+                    //izbrise vse meteorje ki so še na sliki
+                    IzbrisiMeteorje();
+
+                    //Izbrise enemy bullete
+                    IzbrisiEnemyBullete();
+
+                    // samo enkrat ustvarimo first_boss
+                    if (first_boss == null)
+                    {
+                        first_boss = new Boss1(Controls, ClientSize.Width / 2);
+                    }
+
+                    //premikanje boss ladje
+                    first_boss.Boss1Movement(ClientSize.Width);
+
+                    //streljanje
+                    First_boss_ustreli();
 
 
-                PlayerBullets();
+                    PlayerBullets();
 
-                //Preverjanje življenja
-                Preveri_HP_Igralca();
+                    //Preverjanje življenja
+                    Preveri_HP_Igralca();
 
+                }
             }
 
                 Invalidate();
@@ -467,6 +482,7 @@ namespace SpaceInvaders
 
             }
         }
+
 
         /// <summary>
         /// pregleda ali trčita enemy ship in player ship in če grejo enemy_ladje iz zaslona

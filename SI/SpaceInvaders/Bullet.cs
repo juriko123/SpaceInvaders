@@ -11,7 +11,8 @@ namespace SpaceInvaders
     internal class Bullet
     {
         PictureBox bullet;
-        private const int SIZE = 10;
+        private const int HEIGHT = 20;
+        private const int LENGTH = 5;
         private const int SPEED = 10;
         private Color col = Color.Red;
 
@@ -26,7 +27,7 @@ namespace SpaceInvaders
         {
             this.col = col;
             this.bullet = new PictureBox();
-            bullet.Size = new Size(SIZE, SIZE);
+            bullet.Size = new Size(LENGTH, HEIGHT);
             bullet.BackColor = col;
             bullet.Location = new Point(posx,posy);
             controls.Add(bullet);
