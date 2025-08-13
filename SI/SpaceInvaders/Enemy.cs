@@ -47,9 +47,11 @@ namespace SpaceInvaders
                     enemy_Battleship.Size = new Size(SIZE, SIZE);
                     enemy_Battleship.Image = ChangeImage(j);
                     enemy_Battleship.SizeMode = PictureBoxSizeMode.StretchImage;
+                    //enemy_Battleship.BackColor = Color.Transparent;
                     int location_x = i * (SIZE + SPACE_BETWEEN) + (window_width - POLOVICA) / 2;
                     int location_y = j * (SIZE + SPACE_BETWEEN) + 51; //se 51, ker toliko je višina našega labela
                     enemy_Battleship.Location = new Point(location_x, location_y);
+                    enemy_Battleship.Tag = $"{j}. vrstica";
                     enemies.Add(enemy_Battleship);
                     controls.Add(enemy_Battleship);
                 }

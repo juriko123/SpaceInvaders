@@ -12,14 +12,16 @@ namespace SpaceInvaders
     {
         Random rand = new Random();
         private PictureBox meteor;
-        private const int SIZE = 30;
+        private const int SIZE = 50;
         private const int METEOR_SPEED = 10;
-
+        private string path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\meteor.png";
         public Meteor(Control.ControlCollection controls,int window_width)
         {
             meteor = new PictureBox();
             meteor.Size = new Size(SIZE, SIZE);
-            meteor.BackColor = Color.Green;
+            meteor.Image = Image.FromFile(path);
+            meteor.SizeMode = PictureBoxSizeMode.StretchImage;
+            //meteor.BackColor = Color.Transparent;
             meteor.Location = new Point(rand.Next(0, (window_width - SIZE)),0);
             controls.Add(meteor);
         }

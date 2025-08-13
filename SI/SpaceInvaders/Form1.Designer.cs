@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menu_panel = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.NaslovSI = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -48,31 +47,23 @@
             // 
             // menu_panel
             // 
-            this.menu_panel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.menu_panel.BackColor = System.Drawing.Color.Transparent;
+            this.menu_panel.BackgroundImage = global::SpaceInvaders.Properties.Resources.background;
             this.menu_panel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.menu_panel.Controls.Add(this.NaslovSI);
-            this.menu_panel.Controls.Add(this.label1);
             this.menu_panel.Controls.Add(this.button3);
             this.menu_panel.Controls.Add(this.button2);
             this.menu_panel.Controls.Add(this.button1);
-            this.menu_panel.Location = new System.Drawing.Point(-6, -7);
+            this.menu_panel.Location = new System.Drawing.Point(0, 0);
             this.menu_panel.Name = "menu_panel";
-            this.menu_panel.Size = new System.Drawing.Size(1167, 784);
+            this.menu_panel.Size = new System.Drawing.Size(1211, 802);
             this.menu_panel.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(436, 117);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "label1";
             // 
             // NaslovSI
             // 
             this.NaslovSI.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NaslovSI.ForeColor = System.Drawing.Color.Chartreuse;
+            this.NaslovSI.Image = global::SpaceInvaders.Properties.Resources.background;
             this.NaslovSI.Location = new System.Drawing.Point(282, 130);
             this.NaslovSI.Name = "NaslovSI";
             this.NaslovSI.Size = new System.Drawing.Size(614, 108);
@@ -122,16 +113,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.CadetBlue;
+            this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1130, 716);
             this.Controls.Add(this.menu_panel);
+            this.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp_1);
             this.menu_panel.ResumeLayout(false);
-            this.menu_panel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -144,7 +135,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label NaslovSI;
-        private System.Windows.Forms.Label label1;
     }
 }
 

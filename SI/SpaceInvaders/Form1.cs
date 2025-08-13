@@ -96,6 +96,12 @@ namespace SpaceInvaders
                 right = true;
             }
 
+            //pause
+            if (e.KeyCode == Keys.P)
+            {
+                start = false;
+            }
+
             // ko pritisnemo L, moramo dobiti pozicijo igralca(njegovo sredino in vrh)
             // ustvariti now objekt bullet in ga dodati v seznam bullet
             if (e.KeyCode == Keys.L)

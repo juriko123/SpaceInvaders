@@ -21,6 +21,7 @@ namespace SpaceInvaders
             battleship.Size = new Size(SIZE, SIZE);
             battleship.Image = Image.FromFile(path);
             battleship.SizeMode = PictureBoxSizeMode.StretchImage;
+            //battleship.BackColor = Color.Transparent;
             battleship.Location = new Point((lengthWindow - SIZE) / 2, heightWindow - SIZE);
             controls.Add(battleship);
         }
