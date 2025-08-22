@@ -17,14 +17,15 @@ namespace SpaceInvaders
         private const int SPEED = 20;
         private bool edge;
         private int DIRECTION = 1; //desno, -1 levo
+        private string path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\LargeAlien.png";
 
         public Boss1(Control.ControlCollection controls, int posX)
         {
             boss1 = new PictureBox();
             boss1.Size = new Size(LENGTH_SIZE, HEIGHT_SIZE);
             boss1.Location = new Point(posX, HEIGHT_POS);
-            boss1.BackColor = Color.Purple;
-
+            boss1.Image = Image.FromFile(path);
+            boss1.SizeMode = PictureBoxSizeMode.StretchImage;
             controls.Add(boss1);
         }
 

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Media;//za zvok
 using System.Threading;
+using System.Windows.Markup;
 
 namespace SpaceInvaders
 {
@@ -48,11 +50,11 @@ namespace SpaceInvaders
         //Colors
         private Color COL_RED = Color.Red;
         private Color COL_BLUE = Color.Blue;
-        private Color COL_PURPLE = Color.Purple;
+        private Color COL_GREEN = Color.Green;
 
         //Boss1
         Boss1 first_boss;
-        private int first_boss_hp = 20;
+        private int first_boss_hp = 100;
         private const int BOSS1DAMAGE = 10;
 
         //COunter
@@ -61,11 +63,29 @@ namespace SpaceInvaders
         //start game
         private bool start;
 
+        //za zvok
+        SoundPlayer mainMusic; //glavna glasba
+        SoundPlayer laserSound; // ko ustrelimo
+        string path_to_mainmusic = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\sounds\\Music.wav";
+        string path_to_laser = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\sounds\\Laser.wav";
+
+        private Panel menuPanel;
+        private Button startButton;
+        private Button keyboardButton;
+        private Label gameName;
+        private Panel keybindingsPanel;
+        private Button backKeyboard;
+        private Button values;
+        private Panel valuesPanel;
+        private Button backValues;
+
         public Form1()
         {
             InitializeComponent();
             DoubleBuffered = true;
 
+            //glavni menu
+            InitializeMenu();
 
             //GAMElabel
             GameLabel();
@@ -76,12 +96,275 @@ namespace SpaceInvaders
 
             //game start 
             start = false;
+
+            //zvok
+            mainMusic = new SoundPlayer(path_to_mainmusic);
+            //mainMusic.PlayLooping();
+
+            // zvezno ozadje
+            for (int i = 0; i < 100; i++)
+            {
+                Label star = new Label();
+                star.Size = new Size(2, 2);
+                star.BackColor = Color.White;
+                star.Location = new Point(rand.Next(ClientSize.Width), rand.Next(ClientSize.Height));
+                Controls.Add(star);
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
             start = true;
-            menu_panel.Hide();
+            menuPanel.Visible = false; // skrije menu
+        }
+
+        private void keyboardButton_Click(object sender, EventArgs e)
+        {
+            menuPanel.Visible=false;
+
+            // Panel
+            keybindingsPanel = new Panel();
+            keybindingsPanel.Size = new Size(1150, 1000);
+            keybindingsPanel.Location = new Point((ClientSize.Width - menuPanel.Width) / 2, (ClientSize.Height - menuPanel.Height) / 2);
+            keybindingsPanel.BackColor = Color.Black;
+            keybindingsPanel.Visible = true; 
+            Controls.Add(keybindingsPanel);
+            keybindingsPanel.BringToFront();
+
+            //zvezdno ozadje
+            for (int i = 0; i < 100; i++)
+            {
+                Label star = new Label();
+                star.Size = new Size(2, 2);
+                star.BackColor = Color.White;
+                star.Location = new Point(rand.Next(keybindingsPanel.Width), rand.Next(keybindingsPanel.Height));
+                keybindingsPanel.Controls.Add(star);
+            }
+
+            Label moving = new Label();
+            moving.Text = "Moving: <= A   D => ";
+            moving.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            moving.Size = new Size(700, 100);
+            moving.Location = new Point((menuPanel.Width - gameName.Width) / 2, 300);
+            moving.ForeColor = Color.Lime;
+            moving.BackColor = Color.Transparent;
+            moving.TextAlign = ContentAlignment.MiddleCenter;
+            keybindingsPanel.Controls.Add(moving);
+
+            Label shoot = new Label();
+            shoot.Text = "Shooting: L";
+            shoot.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            shoot.Size = new Size(700, 100);
+            shoot.Location = new Point((menuPanel.Width - gameName.Width) / 2, 400);
+            shoot.ForeColor = Color.Lime;
+            shoot.BackColor = Color.Transparent;
+            shoot.TextAlign = ContentAlignment.MiddleCenter;
+            keybindingsPanel.Controls.Add(shoot);
+
+            Label pause = new Label();
+            pause.Text = "Pause: P";
+            pause.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            pause.Size = new Size(700, 100);
+            pause.Location = new Point((menuPanel.Width - gameName.Width) / 2, 500);
+            pause.ForeColor = Color.Lime;
+            pause.BackColor = Color.Transparent;
+            pause.TextAlign = ContentAlignment.MiddleCenter;
+            keybindingsPanel.Controls.Add(pause);
+
+            Label proceed = new Label();
+            proceed.Text = "Continue: N";
+            proceed.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            proceed.Size = new Size(700, 100);
+            proceed.Location = new Point((menuPanel.Width - gameName.Width) / 2, 600);
+            proceed.ForeColor = Color.Lime;
+            proceed.BackColor = Color.Transparent;
+            proceed.TextAlign = ContentAlignment.MiddleCenter;
+            keybindingsPanel.Controls.Add(proceed);
+
+            backKeyboard = new Button();
+            backKeyboard.Text = "BACK";
+            backKeyboard.Font = new Font("Press Start 2P", 12, FontStyle.Bold);
+            backKeyboard.Size = new Size(300, 60);
+            backKeyboard.Location = new Point(800, 100);
+            backKeyboard.ForeColor = Color.Lime;
+            backKeyboard.BackColor = Color.Black;
+            backKeyboard.FlatStyle = FlatStyle.Flat;
+            backKeyboard.FlatAppearance.BorderColor = Color.Lime;
+            backKeyboard.FlatAppearance.BorderSize = 2;
+            backKeyboard.Click += backKeyboard_Click;
+            keybindingsPanel.Controls.Add(backKeyboard);
+        }
+
+        private void backKeyboard_Click(object sender, EventArgs e)
+        {
+            keybindingsPanel.Visible = false;
+            menuPanel.Visible = true;
+        }
+
+        private void backValues_Click(object sender, EventArgs e)
+        {
+            valuesPanel.Visible = false;
+            menuPanel.Visible = true;
+        }
+
+        private void values_Click(object sender, EventArgs e)
+        {
+            menuPanel.Visible = false;
+
+            // Panel
+            valuesPanel = new Panel();
+            valuesPanel.Size = new Size(1150, 1000);
+            valuesPanel.Location = new Point((ClientSize.Width - menuPanel.Width) / 2, (ClientSize.Height - menuPanel.Height) / 2);
+            valuesPanel.BackColor = Color.Black;
+            valuesPanel.Visible = true;
+            Controls.Add(valuesPanel);
+            valuesPanel.BringToFront();
+
+            //zvezdatno ozadje
+            for (int i = 0; i < 100; i++)
+            {
+                Label star = new Label();
+                star.Size = new Size(2, 2);
+                star.BackColor = Color.White;
+                star.Location = new Point(rand.Next(valuesPanel.Width), rand.Next(valuesPanel.Height));
+                valuesPanel.Controls.Add(star);
+            }
+
+            Label enemyvalues = new Label();
+            enemyvalues.Text = "All regular enemies have value of 10 points. Boss has value of 50 points";
+            enemyvalues.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            enemyvalues.Size = new Size(700, 100);
+            enemyvalues.Location = new Point((menuPanel.Width - gameName.Width) / 2, 600);
+            enemyvalues.ForeColor = Color.Lime;
+            enemyvalues.BackColor = Color.Transparent;
+            enemyvalues.TextAlign = ContentAlignment.MiddleCenter;
+            valuesPanel.Controls.Add(enemyvalues);
+
+            Label regularEnemies = new Label();
+            regularEnemies.Text = "REGULAR ENEMIES:";
+            regularEnemies.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            regularEnemies.Size = new Size(700, 100);
+            regularEnemies.Location = new Point((menuPanel.Width - gameName.Width) / 2, 200);
+            regularEnemies.ForeColor = Color.Lime;
+            regularEnemies.BackColor = Color.Transparent;
+            regularEnemies.TextAlign = ContentAlignment.MiddleCenter;
+            valuesPanel.Controls.Add(regularEnemies);
+
+            // zanka da mi nrdi sliko za usak sprite posebi
+            for (int i = 0; i < 4; i++)
+            {
+                string pathRegular = $"C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\{i}.png";
+
+                PictureBox regEnemyPic = new PictureBox();
+                regEnemyPic.Image = Image.FromFile(pathRegular);
+                regEnemyPic.SizeMode = PictureBoxSizeMode.StretchImage;
+                regEnemyPic.Size = new Size(70, 70); 
+                regEnemyPic.Location = new Point(350 + i * 120, 300);
+                valuesPanel.Controls.Add(regEnemyPic);
+            }
+
+            Label boss = new Label();
+            boss.Text = "BOSS:";
+            boss.Font = new Font("Press Start 2P", 25, FontStyle.Bold);
+            boss.Size = new Size(700, 100);
+            boss.Location = new Point((menuPanel.Width - gameName.Width) / 2, 400);
+            boss.ForeColor = Color.Lime;
+            boss.BackColor = Color.Transparent;
+            boss.TextAlign = ContentAlignment.MiddleCenter;
+            valuesPanel.Controls.Add(boss);
+
+            string pathBoss = $"C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\LargeAlien.png";
+            PictureBox Bosspic = new PictureBox();
+            Bosspic.Image = Image.FromFile(pathBoss);
+            Bosspic.SizeMode = PictureBoxSizeMode.StretchImage;
+            Bosspic.Size = new Size(70, 70);
+            Bosspic.Location = new Point(550, 500);
+            valuesPanel.Controls.Add(Bosspic);
+
+            backValues = new Button();
+            backValues.Text = "BACK";
+            backValues.Font = new Font("Press Start 2P", 12, FontStyle.Bold);
+            backValues.Size = new Size(300, 60);
+            backValues.Location = new Point(800, 100);
+            backValues.ForeColor = Color.Lime;
+            backValues.BackColor = Color.Black;
+            backValues.FlatStyle = FlatStyle.Flat;
+            backValues.FlatAppearance.BorderColor = Color.Lime;
+            backValues.FlatAppearance.BorderSize = 2;
+            backValues.Click += backValues_Click;
+            valuesPanel.Controls.Add(backValues);
+        }
+
+        private void InitializeMenu()
+        {
+            // Panel
+            menuPanel = new Panel();
+            menuPanel.Size = new Size(1150, 1000);
+            menuPanel.Location = new Point((ClientSize.Width - menuPanel.Width) / 2, (ClientSize.Height - menuPanel.Height) / 2);
+            menuPanel.BackColor = Color.Black; 
+            Controls.Add(menuPanel);
+
+            // zvezdno ozadje
+            for (int i = 0; i < 100; i++)
+            {
+                Label star = new Label();
+                star.Size = new Size(2, 2);
+                star.BackColor = Color.White;
+                star.Location = new Point(rand.Next(menuPanel.Width), rand.Next(menuPanel.Height));
+                menuPanel.Controls.Add(star);
+            }
+
+            // Label – game title
+            gameName = new Label();
+            gameName.Text = "SPACE INVADERS";
+            gameName.Font = new Font("Press Start 2P", 36, FontStyle.Bold); 
+            gameName.Size = new Size(700, 100);
+            gameName.Location = new Point((menuPanel.Width - gameName.Width) / 2, 100);
+            gameName.ForeColor = Color.Lime;
+            gameName.BackColor = Color.Transparent;
+            gameName.TextAlign = ContentAlignment.MiddleCenter;
+            menuPanel.Controls.Add(gameName);
+
+            // Start game gumb
+            startButton = new Button();
+            startButton.Text = "START GAME";
+            startButton.Font = new Font("Press Start 2P", 12, FontStyle.Bold);
+            startButton.Size = new Size(300, 60);
+            startButton.Location = new Point((menuPanel.Width - startButton.Width) / 2, 400);
+            startButton.ForeColor = Color.Lime;
+            startButton.BackColor = Color.Black;
+            startButton.FlatStyle = FlatStyle.Flat;
+            startButton.FlatAppearance.BorderColor = Color.Lime;
+            startButton.FlatAppearance.BorderSize = 2;
+            startButton.Click += startButton_Click;
+            menuPanel.Controls.Add(startButton);
+
+            // Keyboard gumb
+            keyboardButton = new Button();
+            keyboardButton.Text = "KEYBOARD";
+            keyboardButton.Font = new Font("Press Start 2P", 12, FontStyle.Bold);
+            keyboardButton.Size = new Size(300, 60);
+            keyboardButton.Location = new Point((menuPanel.Width - keyboardButton.Width) / 2, 500);
+            keyboardButton.ForeColor = Color.Lime;
+            keyboardButton.BackColor = Color.Black;
+            keyboardButton.FlatStyle = FlatStyle.Flat;
+            keyboardButton.FlatAppearance.BorderColor = Color.Lime;
+            keyboardButton.FlatAppearance.BorderSize = 2;
+            keyboardButton.Click += keyboardButton_Click;
+            menuPanel.Controls.Add(keyboardButton);
+
+            values = new Button();
+            values.Text = "VALUES";
+            values.Font = new Font("Press Start 2P", 12, FontStyle.Bold);
+            values.Size = new Size(300, 60);
+            values.Location = new Point((menuPanel.Width - keyboardButton.Width) / 2, 600);
+            values.ForeColor = Color.Lime;
+            values.BackColor = Color.Black;
+            values.FlatStyle = FlatStyle.Flat;
+            values.FlatAppearance.BorderColor = Color.Lime;
+            values.FlatAppearance.BorderSize = 2;
+            values.Click += values_Click;
+            menuPanel.Controls.Add(values);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -102,6 +385,12 @@ namespace SpaceInvaders
                 start = false;
             }
 
+            //nadaljevanje
+            if (e.KeyCode == Keys.N)
+            {
+                start = true;
+            }
+
             // ko pritisnemo L, moramo dobiti pozicijo igralca(njegovo sredino in vrh)
             // ustvariti now objekt bullet in ga dodati v seznam bullet
             if (e.KeyCode == Keys.L)
@@ -112,6 +401,8 @@ namespace SpaceInvaders
                 {
                     bullet = new Bullet(playerX, playerY, COL_RED, Controls);
                     bullets_player.Add(bullet);
+                    laserSound = new SoundPlayer(path_to_laser);
+                    laserSound.Play();
                 }
                 shoot = true;
             }
@@ -214,7 +505,7 @@ namespace SpaceInvaders
                 }
             }
 
-                Invalidate();
+            Invalidate();
         }
 
 
@@ -305,10 +596,7 @@ namespace SpaceInvaders
         {
             if (enemy_ships.Get_List().Count == 0)
             {
-                level++;
-                enemy_ships = new Enemy(Controls, ClientSize.Width, level * SPEED_ENEMY);
-                LevelLabel.Text = $"LEVEL: {level}";
-
+                NaslednjiLevel();
             }
         }
 
@@ -386,9 +674,9 @@ namespace SpaceInvaders
                 int y_pos_boss = first_boss.GetBottom();
                 int x_pos_boss_middle = first_boss.GetLeft() + first_boss.GetWidth() / 2 - 5;
                 int x_pos_boss_right = first_boss.GetRight() - 10; //10 je size bulleta
-                Bullet bullet_first_boss_left = new Bullet(x_pos_boss_left, y_pos_boss, COL_PURPLE, Controls);
-                Bullet bullet_first_boss_middle = new Bullet(x_pos_boss_middle, y_pos_boss, COL_PURPLE, Controls);
-                Bullet bullet_first_boss_right = new Bullet(x_pos_boss_right, y_pos_boss, COL_PURPLE, Controls);
+                Bullet bullet_first_boss_left = new Bullet(x_pos_boss_left, y_pos_boss, COL_GREEN, Controls);
+                Bullet bullet_first_boss_middle = new Bullet(x_pos_boss_middle, y_pos_boss, COL_GREEN, Controls);
+                Bullet bullet_first_boss_right = new Bullet(x_pos_boss_right, y_pos_boss, COL_GREEN, Controls);
                 bullets_first_boss.Add(bullet_first_boss_left);
                 bullets_first_boss.Add(bullet_first_boss_middle);
                 bullets_first_boss.Add(bullet_first_boss_right);
@@ -464,7 +752,7 @@ namespace SpaceInvaders
                 {
                     bullets_player[i].Destroy_bullet(Controls);
                     bullets_player.RemoveAt(i);
-                    continue; // gremo na naslednji bullet, da se izognemo napaki
+                    continue;
                 }
 
                 if (first_boss != null && bullets_player[i].GetBounds().IntersectsWith(first_boss.Bounds()))
@@ -472,23 +760,36 @@ namespace SpaceInvaders
                     bullets_player[i].Destroy_bullet(Controls);
                     bullets_player.RemoveAt(i);
 
-                    //boss hp --
+                    // boss hp --
                     first_boss_hp -= 10;
 
-                    if (first_boss_hp == 0)
+                    if (first_boss_hp <= 0)
                     {
                         first_boss.Destroy_first_Boss(Controls);
-                        level++;
+                        first_boss = null;
+                        first_boss_hp = 20;
 
                         points += 50;
                         PointsLabel.Text = $"SCORE: {points}";
+
+                        NaslednjiLevel();
                     }
                 }
-
-
             }
         }
 
+        private void NaslednjiLevel()
+        {
+            level++;
+            LevelLabel.Text = $"LEVEL: {level}";
+
+            // če je boss level, počakamo da ga ustvari GameUpdate()
+            if (level % 5 != 0)
+            {
+                // ustvari nove enemy ladje
+                enemy_ships = new Enemy(Controls, ClientSize.Width, level * SPEED_ENEMY);
+            }
+        }
 
         /// <summary>
         /// pregleda ali trčita enemy ship in player ship in če grejo enemy_ladje iz zaslona
@@ -565,5 +866,6 @@ namespace SpaceInvaders
 
 
         }
+
     }
 }
