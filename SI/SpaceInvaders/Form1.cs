@@ -57,6 +57,11 @@ namespace SpaceInvaders
         private int first_boss_hp = 100;
         private const int BOSS1DAMAGE = 10;
 
+        //Boss2
+        private Boss2 second_boss;
+        private int second_boss_hp = 100;
+        private const int BOSS2DAMAGE = 1;
+
         //COunter
         private int counter = 0;
 
@@ -433,42 +438,40 @@ namespace SpaceInvaders
             
             else
             {
-                if (level % 5 != 0)
+                if (level % 10 == 0)
                 {
-
                     if (left) player.Move_left();
-
                     if (right) player.Move_Right(ClientSize.Width);
 
+                    Izbrisi_enemy();
+                    IzbrisiMeteorje();
+                    IzbrisiEnemyBullete();
 
-                    // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy_ship
-                    Trk_bulletov_enemy();
+                    if (second_boss == null)
+                    {
+                        second_boss = new Boss2(Controls, ClientSize.Width / 2, ClientSize.Height);
+                    }
 
-                    //premiki enemyjev, če zadane rob, da gre dol...
-                    enemy_ships.Move_enemies(ClientSize.Width);
+                    second_boss.Boss2Movement(ClientSize.Width);
+                    second_boss.UstreliLaser();
 
-                    //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
-                    Ustvari_meteor();
+                    if (second_boss.LaserHits(player.GetBounds()))
+                    {
+                        hp_player -= BOSS2DAMAGE;
 
-                    //Preveri trke med igralcem in window height
-                    Trk_Meteorja();
+                        HpLabel.Text = $"HP: {hp_player}";
 
-                    //povecanje levela, če ni nasprotnikov, ustvarjanje nasprotnikov spet
-                    Povecanje_levela();
+                        //progress bar
+                        HpBar.Value = Math.Max(0, Math.Min(hp_player, MAX_HP));
+                        HpBar.Refresh();
+                    }
 
-                    //Preverjanje življenja
+                    PlayerBullets();
+
                     Preveri_HP_Igralca();
-
-                    // enemy ustreli metek
-                    Enemy_ustreli();
-
-                    TrkEnemy_Player();
-
-                    //izbrise bullete prvega bossa
-                    IzbrisiFirstBossBullete();
-
                 }
-                else
+
+                else if (level % 5 == 0)
                 {
                     //player movement
                     if (left) player.Move_left();
@@ -501,7 +504,41 @@ namespace SpaceInvaders
 
                     //Preverjanje življenja
                     Preveri_HP_Igralca();
+                    
 
+                }
+                else
+                {
+                    if (left) player.Move_left();
+
+                    if (right) player.Move_Right(ClientSize.Width);
+
+
+                    // ustrelimo bullet, če gre nad screen ga uničimo, preveri trk in uniči če zadane enemy_ship
+                    Trk_bulletov_enemy();
+
+                    //premiki enemyjev, če zadane rob, da gre dol...
+                    enemy_ships.Move_enemies(ClientSize.Width);
+
+                    //ustvarimo meteroje z verjetnostjo 1% in jih spuščamo
+                    Ustvari_meteor();
+
+                    //Preveri trke med igralcem in window height
+                    Trk_Meteorja();
+
+                    //povecanje levela, če ni nasprotnikov, ustvarjanje nasprotnikov spet
+                    Povecanje_levela();
+
+                    //Preverjanje življenja
+                    Preveri_HP_Igralca();
+
+                    // enemy ustreli metek
+                    Enemy_ustreli();
+
+                    TrkEnemy_Player();
+
+                    //izbrise bullete prvega bossa
+                    IzbrisiFirstBossBullete();
                 }
             }
 
@@ -607,7 +644,11 @@ namespace SpaceInvaders
         {
             if (hp_player <= 0)
             {
-                Application.Exit();
+                start = false;
+                level = 1;
+                menuPanel.Visible = true;
+                MessageBox.Show($"Igre je konec, dosegli ste {points} točk");
+                hp_player = 100;
             }
         }
 
@@ -767,7 +808,28 @@ namespace SpaceInvaders
                     {
                         first_boss.Destroy_first_Boss(Controls);
                         first_boss = null;
-                        first_boss_hp = 20;
+                        first_boss_hp = 100;
+
+                        points += 50;
+                        PointsLabel.Text = $"SCORE: {points}";
+
+                        NaslednjiLevel();
+                    }
+                }
+
+                else if (second_boss != null && bullets_player[i].GetBounds().IntersectsWith(second_boss.Bounds()))
+                {
+                    bullets_player[i].Destroy_bullet(Controls);
+                    bullets_player.RemoveAt(i);
+
+                    // boss hp --
+                    second_boss_hp -= 10;
+
+                    if (second_boss_hp <= 0)
+                    {
+                        second_boss.Destroy_second_Boss(Controls);
+                        second_boss = null;
+                        second_boss_hp = 100;
 
                         points += 50;
                         PointsLabel.Text = $"SCORE: {points}";
@@ -866,6 +928,5 @@ namespace SpaceInvaders
 
 
         }
-
     }
 }
