@@ -104,7 +104,7 @@ namespace SpaceInvaders
 
             //zvok
             mainMusic = new SoundPlayer(path_to_mainmusic);
-            //mainMusic.PlayLooping();
+            mainMusic.PlayLooping();
 
             // zvezno ozadje
             for (int i = 0; i < 100; i++)
