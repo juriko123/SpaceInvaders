@@ -71,6 +71,7 @@ namespace SpaceInvaders
         //za zvok
         SoundPlayer mainMusic; //glavna glasba
         SoundPlayer laserSound; // ko ustrelimo
+        SoundPlayer laserSoundHit; // ko zadanemo
         string path_to_mainmusic = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\sounds\\Music.wav";
         string path_to_laser = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\sounds\\Laser.wav";
 
@@ -575,6 +576,9 @@ namespace SpaceInvaders
                         Controls.Remove(enemy_list[j]);
                         enemy_list.RemoveAt(j);
 
+                        laserSoundHit = new SoundPlayer(path_to_laser);
+                        laserSoundHit.Play();
+
                         bullets_player[i].Destroy_bullet(Controls);
                         bullets_player.RemoveAt(i);
                         break;
@@ -664,6 +668,9 @@ namespace SpaceInvaders
                     int posY = kdo_bo_ustrelil.Bottom;
                     bullet_enemy = new Bullet(posX, posY, COL_BLUE, Controls);
                     bullets_enemy.Add(bullet_enemy);
+
+                    laserSound = new SoundPlayer(path_to_laser);
+                    laserSound.Play();
                 }
             }
 
@@ -804,6 +811,9 @@ namespace SpaceInvaders
                     // boss hp --
                     first_boss_hp -= 10;
 
+                    laserSoundHit = new SoundPlayer(path_to_laser);
+                    laserSoundHit.Play();
+
                     if (first_boss_hp <= 0)
                     {
                         first_boss.Destroy_first_Boss(Controls);
@@ -824,6 +834,9 @@ namespace SpaceInvaders
 
                     // boss hp --
                     second_boss_hp -= 10;
+
+                    laserSoundHit = new SoundPlayer(path_to_laser);
+                    laserSoundHit.Play();
 
                     if (second_boss_hp <= 0)
                     {
