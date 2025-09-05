@@ -56,7 +56,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Laser.cs" />
     <Compile Include="Meteor.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />

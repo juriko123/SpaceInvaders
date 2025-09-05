@@ -7,10 +7,6 @@
       "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\laser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\laser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\boss2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\boss2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -46,11 +42,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Player.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Player.cs",
@@ -63,7 +59,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "Bullet.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Bullet.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Bullet.cs",
@@ -77,18 +73,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Laser.cs",
-              "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Laser.cs",
-              "RelativeDocumentMoniker": "SpaceInvaders\\Laser.cs",
-              "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Laser.cs",
-              "RelativeToolTip": "SpaceInvaders\\Laser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T17:18:01.78Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Boss2.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Boss2.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Boss2.cs",
@@ -100,7 +84,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Boss1.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Boss1.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Boss1.cs",
@@ -112,7 +96,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Meteor.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Meteor.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Meteor.cs",
@@ -124,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Enemy.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Enemy.cs",
@@ -142,14 +126,14 @@
               "RelativeDocumentMoniker": "SpaceInvaders\\Form1.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Form1.cs",
               "RelativeToolTip": "SpaceInvaders\\Form1.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAADwv2QAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T10:40:45.125Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Form1.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Form1.cs",
