@@ -7,20 +7,20 @@
       "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\boss2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\boss2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\boss1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\boss1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\meteor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\meteor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\boss1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\boss1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\boss2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|solutionrelative:spaceinvaders\\boss2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{192BCF97-B664-4384-ACA4-9F39A4F0DE4C}|SpaceInvaders\\SpaceInvaders.csproj|C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\spaceinvaders\\bullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "SpaceInvaders\\Player.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Player.cs",
               "RelativeToolTip": "SpaceInvaders\\Player.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T10:43:41.99Z",
               "EditorCaption": ""
@@ -65,59 +65,59 @@
               "RelativeDocumentMoniker": "SpaceInvaders\\Bullet.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Bullet.cs",
               "RelativeToolTip": "SpaceInvaders\\Bullet.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAcwEQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAADwv0QAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T11:44:12.596Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Boss2.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Boss2.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Boss2.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Boss2.cs",
               "RelativeToolTip": "SpaceInvaders\\Boss2.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAmwG4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAADwv24AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-04T16:38:32.358Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Boss1.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Boss1.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Boss1.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Boss1.cs",
               "RelativeToolTip": "SpaceInvaders\\Boss1.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA0wEoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAswEoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T16:12:38.169Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Meteor.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Meteor.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Meteor.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Meteor.cs",
               "RelativeToolTip": "SpaceInvaders\\Meteor.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAmwDIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAADIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T14:21:51.257Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Enemy.cs",
               "RelativeDocumentMoniker": "SpaceInvaders\\Enemy.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Enemy.cs",
               "RelativeToolTip": "SpaceInvaders\\Enemy.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAmwF8AAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAEUAAAAAAAAAAAA2wF8AAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T12:30:51.26Z",
               "EditorCaption": ""
@@ -130,7 +130,7 @@
               "RelativeDocumentMoniker": "SpaceInvaders\\Form1.cs",
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Form1.cs",
               "RelativeToolTip": "SpaceInvaders\\Form1.cs",
-              "ViewState": "AgIAACUCAAAAAAAAAAAiwEICAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAPIBAAAAAAAAAAAmwBgDAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-16T10:40:45.125Z",
               "EditorCaption": ""
@@ -144,8 +144,7 @@
               "ToolTip": "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\SpaceInvaders\\Form1.cs [Design]",
               "RelativeToolTip": "SpaceInvaders\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-16T10:39:43.377Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-07-16T10:39:43.377Z"
             }
           ]
         }
