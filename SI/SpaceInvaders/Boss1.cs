@@ -17,7 +17,7 @@ namespace SpaceInvaders
         private const int SPEED = 20;
         private bool edge;
         private int DIRECTION = 1; //desno, -1 levo
-        private string path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\LargeAlien.png";
+        private string path = "Resources/LargeAlien.png";
 
         public Boss1(Control.ControlCollection controls, int posX)
         {

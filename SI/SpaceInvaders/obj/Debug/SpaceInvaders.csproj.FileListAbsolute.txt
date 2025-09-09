@@ -9,3 +9,14 @@ C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\obj\Debug\SpaceInvaders.exe
 C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\obj\Debug\SpaceInvaders.pdb
 C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\obj\Debug\SpaceInvaders.exe.config
 C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\obj\Debug\SpaceInvaders.Form1.resources
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\0.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\1.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\2.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\3.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\black.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\LargeAlien.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\meteor.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\player.png
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Music\Explosion.wav
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Music\Laser.wav
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Music\Music.wav

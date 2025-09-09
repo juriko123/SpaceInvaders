@@ -14,7 +14,7 @@ namespace SpaceInvaders
         private PictureBox meteor;
         private const int SIZE = 50;
         private const int METEOR_SPEED = 10;
-        private string path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\meteor.png";
+        private string path = "Resources/meteor.png";
         public Meteor(Control.ControlCollection controls,int window_width)
         {
             meteor = new PictureBox();

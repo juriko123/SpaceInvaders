@@ -72,8 +72,9 @@ namespace SpaceInvaders
         SoundPlayer mainMusic; //glavna glasba
         SoundPlayer laserSound; // ko ustrelimo
         SoundPlayer laserSoundHit; // ko zadanemo
-        string path_to_mainmusic = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\sounds\\Music.wav";
-        string path_to_laser = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\sounds\\Laser.wav";
+        string path_to_mainmusic = "Music/Music.wav";
+        string path_to_laser = "Music/Laser.wav";
+        string path_to_collision = "Music/Explosion";
 
         private Panel menuPanel;
         private Button startButton;
@@ -811,7 +812,7 @@ namespace SpaceInvaders
                     // boss hp --
                     first_boss_hp -= 10;
 
-                    laserSoundHit = new SoundPlayer(path_to_laser);
+                    laserSoundHit = new SoundPlayer(path_to_collision);
                     laserSoundHit.Play();
 
                     if (first_boss_hp <= 0)

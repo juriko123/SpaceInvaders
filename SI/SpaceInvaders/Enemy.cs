@@ -60,7 +60,7 @@ namespace SpaceInvaders
 
         public System.Drawing.Image ChangeImage(int column)
         {
-            string image_path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\";
+            string image_path = "Resources/";
             if (column % 5 == 1) return System.Drawing.Image.FromFile(image_path + "0.png");
             else if (column % 5 == 2) return System.Drawing.Image.FromFile(image_path + "1.png");
             else if (column % 5 == 3) return System.Drawing.Image.FromFile(image_path + "2.png");

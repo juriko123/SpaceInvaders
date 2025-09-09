@@ -13,7 +13,7 @@ namespace SpaceInvaders
         private PictureBox battleship;
         private const int SIZE = 40;
         private const int SPEED = 10;
-        private string path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\player.png";
+        private string path = "Resources/player.png";
 
         public Player(Control.ControlCollection controls ,int lengthWindow, int heightWindow)
         {

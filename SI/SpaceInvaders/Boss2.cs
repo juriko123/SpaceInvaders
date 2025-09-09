@@ -18,7 +18,7 @@ namespace SpaceInvaders
         private const int SPEED = 5;
         private bool edge;
         private int DIRECTION = 1; //desno, -1 levo
-        private string path = "C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\LargeAlien.png";
+        private string path = "Resources/LargeAlien.png";
         private bool laserActive;
         private int laserCooldown = 0;
         private int laserDuration = 50;
