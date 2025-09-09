@@ -260,7 +260,7 @@ namespace SpaceInvaders
             // zanka da mi nrdi sliko za usak sprite posebi
             for (int i = 0; i < 4; i++)
             {
-                string pathRegular = $"C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\{i}.png";
+                string pathRegular = $"Resources/{i}.png";
 
                 PictureBox regEnemyPic = new PictureBox();
                 regEnemyPic.Image = Image.FromFile(pathRegular);
@@ -280,7 +280,7 @@ namespace SpaceInvaders
             boss.TextAlign = ContentAlignment.MiddleCenter;
             valuesPanel.Controls.Add(boss);
 
-            string pathBoss = $"C:\\Users\\jurij\\Desktop\\SpaceI\\SI\\images\\LargeAlien.png";
+            string pathBoss = $"Resources/LargeAlien.png";
             PictureBox Bosspic = new PictureBox();
             Bosspic.Image = Image.FromFile(pathBoss);
             Bosspic.SizeMode = PictureBoxSizeMode.StretchImage;

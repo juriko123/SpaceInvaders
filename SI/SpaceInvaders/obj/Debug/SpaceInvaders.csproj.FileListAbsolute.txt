@@ -20,3 +20,7 @@ C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Resources\player.png
 C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Music\Explosion.wav
 C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Music\Laser.wav
 C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\Music\Music.wav
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\SpaceInvaders.exe.manifest
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\bin\Debug\SpaceInvaders.application
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\obj\Debug\SpaceInvaders.exe.manifest
+C:\Users\jurij\Desktop\SpaceI\SI\SpaceInvaders\obj\Debug\SpaceInvaders.application
